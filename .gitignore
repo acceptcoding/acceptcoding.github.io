@@ -1,0 +1,12 @@
+# Local dependencies and coverage output
+/node_modules/
+/coverage/
+/.nyc_output/
+
+# Local machine/editor noise
+.DS_Store
+*.log
+
+# Local credentials
+.env
+.env.*

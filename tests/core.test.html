@@ -1,0 +1,23 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>ACCEPT core tests</title>
+<pre id="results">Running…</pre>
+<script type="module">
+import * as core from '../core.js';
+const out = [];
+const test = async (name, fn) => { try { await fn(); out.push(`PASS ${name}`); } catch (error) { out.push(`FAIL ${name}: ${error.message}`); } };
+const equal = (a, b) => { if (!Object.is(a, b)) throw new Error(`expected ${JSON.stringify(b)}, got ${JSON.stringify(a)}`); };
+(async () => {
+  await test('constants', () => equal(core.LAUNCH_DATE, '2026-09-01'));
+  await test('strict date', () => equal(core.isValidDateString('2026-02-30'), false));
+  await test('local date', () => equal(core.todayAtLocal(new Date(2026, 8, 10, 12)), '2026-09-10'));
+  await test('13-position ladder', async () => {
+    const records = Array.from({ length: 22 }, (_, index) => ({ contestId: 355 + index, index: 'A', name: `p-${index}`, rating: 800 + Math.floor(index / 2) * 100, type: 'PROGRAMMING', tags: [] }));
+    const ladder = await core.buildLadder(records, '2026-09-01', core.SITE_SALT, '2026-09-01');
+    equal(ladder.length, core.LADDER_SIZE);
+    equal(new Set(ladder.map(core.stableProblemId)).size, core.LADDER_SIZE);
+  });
+  await test('URL fallback', () => equal(core.parseUrlState('https://x.test/?level=bad', '2026-09-10').level, 'newbie'));
+  document.querySelector('#results').textContent = out.join('\n') + `\n\n${out.filter(x => x.startsWith('PASS')).length}/${out.length} passed`;
+})();
+</script>

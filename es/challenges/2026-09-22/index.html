@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es" data-route-language="es" data-language="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Entrenamiento diario con tres problemas de Codeforces. Resuelve uno.">
+  <title>ACCEPT Coding Club</title>
+  <link rel="canonical" href="/es/challenges/2026-09-22/">
+  <script>!function(){if(location.pathname==='/'&&!location.search.includes('legacy')){try{var s=localStorage.getItem('accept-language'),p=(navigator.languages&&navigator.languages[0])||navigator.language||'';p=String(p).toLowerCase().split('-')[0];var l=s==='pt'||s==='en'||s==='es'?s:p==='pt'?'pt':p==='es'?'es':'en';location.replace('/'+l+'/')}catch(e){}}}();</script>
+  <script>!function(){try{var m=location.pathname.match(/^\/(pt|en|es)(?:\/|$)/);var t=localStorage.getItem('accept-theme');if(t!=='light'&&t!=='dark')t='light';document.documentElement.dataset.theme=t;document.documentElement.style.colorScheme=t;var l=m?.[1]||localStorage.getItem('accept-language');if(l!=='pt'&&l!=='en'&&l!=='es'){var p=(navigator.languages&&navigator.languages[0])||navigator.language||'';p=String(p).toLowerCase().split('-')[0];l=p==='pt'?'pt':p==='es'?'es':'en';}document.documentElement.lang=l;document.documentElement.dataset.language=l;document.documentElement.classList.add('language-pending');document.title='ACCEPT Coding Club'}catch(e){}}();</script>
+  <style id="critical-shell">:root{color-scheme:light;background:#f1f7f6;color:#18302e;font-family:"Roboto",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}:root[data-theme="dark"]{color-scheme:dark;background:#0d1818;color:#edf8f6}*,*::before,*::after{box-sizing:border-box}body{margin:0;min-width:300px;background:inherit;color:inherit;font-family:inherit;font-size:16.5px}button,input{font:inherit}.language-pending .theme-current-icon{visibility:hidden}.shell{width:min(calc(100% - 22px),594px);margin:0 auto;padding:18px 0 48px}.masthead{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;margin-bottom:16px}.brand-block{display:grid;grid-template-columns:var(--brand-balloon-width,36px) max-content;column-gap:var(--brand-lockup-gap,7px);align-items:center;width:fit-content;min-width:0;color:inherit;text-align:left;text-decoration:none}.brand-lockup{display:grid;grid-template-columns:max-content 1px minmax(0,max-content);column-gap:9px;align-items:center;justify-self:start;min-width:0}.brand-copy{display:flex;min-width:0;flex-direction:column;align-items:flex-start;transform:translateX(-2px)}.brand-name{color:#18302e;font-family:"Roboto Condensed","Arial Narrow","Roboto",system-ui,sans-serif;font-size:29px;font-weight:700;letter-spacing:.04em;line-height:1}.brand-club{margin-top:3px;color:#0f766e;font-family:"Roboto Condensed","Arial Narrow","Roboto",system-ui,sans-serif;font-size:16px;font-weight:600;letter-spacing:.08em;line-height:1.05}.brand-tagline{display:flex;flex-direction:column;align-items:flex-start;color:#5f7471;font-family:"Roboto Condensed","Arial Narrow","Roboto",system-ui,sans-serif;font-size:13.2px;line-height:1.35}.brand-tagline-line{white-space:nowrap}.brand-divider{align-self:center;width:1px;height:42px;border-left:1px solid #bfd4d0}.balloon-icon{height:45px;width:36px;aspect-ratio:4/5;transform:translateY(-2px);transform-origin:center}.tools{display:flex;align-items:center;justify-self:end;gap:6px}.preference-menu{position:relative;flex:0 0 auto}.preference-trigger{display:flex;align-items:center;min-height:36px;gap:7px;padding:0 10px;border:1px solid #bfd4d0;border-radius:8px;background:#fbfdfc;color:#18302e;cursor:pointer;font-size:13.2px;font-weight:700;line-height:1;list-style:none;white-space:nowrap}.preference-trigger::-webkit-details-marker{display:none}.preference-trigger:hover{border-color:#0f766e;background:#dcefeb}.preference-chevron{flex:0 0 auto;width:16px;height:16px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8}.preference-menu[open] .preference-chevron{transform:rotate(180deg)}.preference-options{position:absolute;z-index:5;top:calc(100% + 6px);right:0;min-width:178px;padding:4px;border:1px solid #bfd4d0;border-radius:8px;background:#fbfdfc}.language-control .preference-options{right:auto;left:0;min-width:0;width:max-content}.preference-options button{display:flex;align-items:center;width:100%;min-height:34px;gap:8px;padding:7px 9px;border-radius:5px;background:transparent;color:#18302e;font-size:13px;line-height:1.2;text-align:left;white-space:nowrap}.language-control .preference-options button{min-height:30px;padding:5px 8px}.preference-options button:hover,.preference-options button[aria-pressed="true"]{background:#dcefeb;color:#0f766e}.language-control .preference-trigger{gap:5px;padding-inline:8px}.theme-control .preference-trigger{width:auto;min-width:0;justify-content:flex-start;gap:5px;padding-inline:8px}.theme-current-icon,.theme-option-icon{display:grid;place-items:center;width:18px;height:18px}.theme-current-icon svg,.theme-option-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8}.handle-row{display:flex;gap:8px}.handle-row input{min-width:0;flex:1;min-height:44px;padding:10px 12px;border:1px solid #bfd4d0;border-radius:9px}.icon-button{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;padding:10px;border:1px solid #0f766e;border-radius:9px;background:#0f766e;color:#fff}.identity{margin:0 0 18px}.session-state{display:flex;align-items:center;justify-content:space-between;min-height:25px;gap:12px;margin:6px 2px 0}.profile{min-width:0;color:#5f7471;font-size:13.5px;line-height:1.3}.completion{min-width:0;margin:0;padding:0;text-align:right}.completion>span{font-size:14px;font-weight:600;line-height:1.3;white-space:nowrap}.intro{margin:8px 0 16px;color:#18302e;font-family:"Roboto Condensed","Arial Narrow","Roboto",system-ui,sans-serif;font-size:17px;font-weight:400;line-height:1.35;text-align:center}.intro strong{font-weight:700}:root[data-theme="dark"] .brand-name{color:#edf8f6}:root[data-theme="dark"] .brand-club,:root[data-theme="dark"] .preference-trigger{color:#66d1c5}:root[data-theme="dark"] .brand-tagline{color:#aac2be}:root[data-theme="dark"] .preference-trigger,:root[data-theme="dark"] .preference-options{border-color:#385653;background:#142322}:root[data-theme="dark"] .preference-options button{color:#edf8f6}@media(max-width:520px){.masthead{grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-bottom:14px}.brand-lockup{width:fit-content;grid-template-columns:max-content 1px minmax(0,max-content);column-gap:9px}.brand-tagline{font-size:13.2px}.tools{justify-self:end;gap:5px}.preference-trigger{min-height:34px}.identity{margin-bottom:16px}.language-pending [data-i18n],.language-pending [data-i18n-placeholder],.language-pending [data-i18n-aria],.language-pending .language-current,.language-pending .language-option,.language-pending .theme-option-label{visibility:hidden}}@media(max-width:480px){.masthead{grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-bottom:14px}.tools{justify-self:end}}@media(max-width:370px){.shell{width:min(calc(100% - 16px),594px)}.identity{margin-bottom:16px}.masthead{grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-bottom:14px}.tools{justify-self:end}.preference-trigger{min-height:34px}}@media(max-width:400px){.brand-lockup{grid-template-columns:max-content;column-gap:0}.brand-divider,.brand-tagline{display:none}}@media(min-width:521px){.shell{width:min(calc(100% - 32px),594px);padding-top:27px}}:root.language-pending [data-i18n],:root.language-pending [data-i18n-placeholder],:root.language-pending [data-i18n-aria],:root.language-pending .language-current,:root.language-pending .language-option,:root.language-pending .theme-option-label{visibility:hidden}</style>
+  <link rel="preload" href="/assets/fonts/roboto/roboto-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/roboto-condensed/roboto-condensed-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/styles.css?v=ui-polish-56">
+  <link rel="icon" type="image/svg+xml" href="/balloon.svg?wordmark-pass-2">
+</head>
+<body>
+  <main class="shell daily-shell">
+    <header class="masthead">
+      <a class="daily-back" id="daily-back" href="/es/" data-i18n-aria="homeNav" aria-label="Inicio">←</a>
+      <div class="brand-lockup">
+        <a class="brand-block" href="/es/" aria-label="ACCEPT Coding Club">
+          <img class="balloon-icon" src="/balloon-shape.svg?wordmark-pass-3" alt="">
+          <span class="brand-copy">
+            <span class="brand-name">ACCEPT</span>
+            <span class="brand-club">CODING CLUB</span>
+          </span>
+        </a>
+        <span class="brand-divider" aria-hidden="true"></span>
+        <a class="brand-tagline" href="/es/" role="group" data-i18n-aria="tagline" aria-label="Ejercicios, Práctica y Técnica">
+          <span class="brand-tagline-line" data-i18n="taglineLine1">Ejercicios,</span>
+          <span class="brand-tagline-line" data-i18n="taglineLine2">Práctica y</span>
+          <span class="brand-tagline-line" data-i18n="taglineLine3">Técnica</span>
+        </a>
+      </div>
+      <div class="tools">
+        <details class="preference-menu language-control" id="language">
+          <summary class="preference-trigger" data-i18n-aria="languageCurrent" aria-label="Cambiar idioma. Idioma actual: Español." aria-expanded="false" aria-controls="language-options"><span class="language-icon" aria-hidden="true">文A</span><span class="language-summary-label" data-i18n="language">Idioma</span><span class="language-current">ES</span><svg class="preference-chevron" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="preference-options" id="language-options" data-i18n-aria="language" aria-label="Idioma"><button class="preference-close" type="button" data-i18n-aria="close" aria-label="Cerrar">×</button><div class="preference-dialog-heading"><span class="language-icon" aria-hidden="true">文A</span><span data-i18n="language">Idioma</span></div>
+            <button class="language-option" type="button" data-language="pt" aria-label="Português" aria-pressed="false">Português</button>
+            <button class="language-option" type="button" data-language="en" aria-label="English" aria-pressed="false">English</button>
+            <button class="language-option" type="button" data-language="es" aria-label="Español" aria-pressed="true">Español</button>
+          </div>
+        </details>
+        <details class="preference-menu theme-control" id="theme">
+          <summary class="preference-trigger" data-i18n-aria="themeCurrent" data-i18n-title="Tema" aria-label="Tema" title="Tema" aria-expanded="false" aria-controls="theme-options"><span class="theme-current-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18h1.2a1.8 1.8 0 0 0 0-3.6h-.8a1.8 1.8 0 0 1 0-3.6H15a6 6 0 0 0 0-12h-3Z"/><circle cx="7.5" cy="10" r=".8"/><circle cx="10" cy="6.8" r=".8"/><circle cx="14" cy="6.8" r=".8"/></svg></span><span class="theme-summary-label" data-i18n="theme">Tema</span><svg class="preference-chevron" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="preference-options" id="theme-options" data-i18n-aria="theme" aria-label="Tema"><button class="preference-close" type="button" data-i18n-aria="close" aria-label="Cerrar">×</button><div class="preference-dialog-heading"><span class="theme-current-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18h1.2a1.8 1.8 0 0 0 0-3.6h-.8a1.8 1.8 0 0 1 0-3.6H15a6 6 0 0 0 0-12h-3Z"/><circle cx="7.5" cy="10" r=".8"/><circle cx="10" cy="6.8" r=".8"/><circle cx="14" cy="6.8" r=".8"/></svg></span><span data-i18n="theme">Tema</span></div>
+            <button class="theme-option" type="button" data-theme-choice="light" data-i18n-aria="themeLight" aria-label="Claro" aria-pressed="false"><span class="theme-option-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 3v2M12 19v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M3 12h2M19 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/><circle cx="12" cy="12" r="3.5"/></svg></span><span class="theme-option-label" data-i18n="themeLight">Claro</span></button>
+            <button class="theme-option" type="button" data-theme-choice="dark" data-i18n-aria="themeDark" aria-label="Oscuro" aria-pressed="false"><span class="theme-option-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20.5 14.7A8.5 8.5 0 0 1 9.3 3.5 8.5 8.5 0 1 0 20.5 14.7Z"/></svg></span><span class="theme-option-label" data-i18n="themeDark">Oscuro</span></button>
+
+          </div>
+        </details>
+        <details class="help-menu" id="help">
+          <summary class="help-trigger" data-i18n-aria="help" aria-label="Ayuda">?</summary>
+          <button class="help-backdrop" type="button" tabindex="-1" data-i18n-aria="close" aria-label="Cerrar"></button>
+          <div class="help-popover" role="dialog" aria-modal="true" aria-labelledby="help-title">
+            <button class="help-close" type="button" data-i18n-aria="close" aria-label="Cerrar" title="Fechar">×</button>
+            <h2 id="help-title" data-i18n="howToHeading">¿Cómo usar ACCEPT?</h2>
+            <p class="help-intro"><span data-i18n="howToCodeforcesBefore"></span><a href="https://codeforces.com/" target="_blank" rel="noopener">Codeforces</a><span data-i18n="howToCodeforcesAfter"> contiene los enunciados, los envíos y los resultados.</span></p>
+            <ol class="help-steps">
+              <li><h3 data-i18n="howToStep2Title">Enunciado del problema</h3><ul><li><span data-i18n="howToStep2Before">Abre el enunciado desde su título en </span><a href="https://codeforces.com/" target="_blank" rel="noopener">Codeforces</a><span data-i18n="howToStep2After">.</span></li><li data-i18n="howToStep2Item2">Si hace falta, usa la traducción del navegador u otra herramienta.</li></ul></li>
+              <li><h3 data-i18n="howToStep3Title">Solución y envío</h3><ul><li data-i18n="howToStep3Item1">Resuelve el problema y envía la solución en Codeforces.</li><li data-i18n="howToStep3Item2">Se necesita una cuenta gratuita para seguir el resultado.</li></ul></li>
+              <li><h3 data-i18n="howToStep4Title">Handle de Codeforces</h3><ul><li data-i18n="howToStep4Item1">Indica tu handle de Codeforces al volver.</li><li data-i18n="howToStep4Item2">Los resultados de los envíos aparecen en la lista.</li></ul></li>
+            </ol>
+            <p class="help-note" data-i18n="howToNote">Puedes leer y practicar sin una cuenta. Se necesita una cuenta para enviar soluciones y seguir los resultados.</p>
+          </div>
+        </details>
+      </div>
+    </header>
+    <header class="challenge-heading">
+      <div>
+        <p class="section-kicker" data-i18n="homeDailyHeading">Desafío de hoy</p>
+        <h1 id="game-title" data-i18n="gameTitle">Entrenamiento de hoy</h1>
+        <p id="challenge-date" class="challenge-date"></p>
+      </div>
+      <div class="share-control">
+        <button id="share-challenge" class="share-button" type="button"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 11 7.6-4.5M8.2 13l7.6 4.5"/></svg><span data-i18n="shareChallenge">Compartir</span></button>
+        <span id="share-status" class="sr-only" role="status" aria-live="polite"></span>
+      </div>
+    </header>
+
+    <div class="daily-stage">
+    <section class="identity" data-i18n-aria="account" aria-label="Cuenta de Codeforces">
+      <p class="identity-kicker" role="status" aria-live="polite" data-i18n="handleLabel">Escribe un handle de Codeforces...</p>
+      <form class="handle-row" id="handle-form">
+        <label class="sr-only" for="handle" data-i18n="handle">Tu handle (p. ej., tourist)…</label>
+        <input id="handle" name="handle" autocomplete="off" aria-autocomplete="list" aria-controls="handle-suggestions" aria-expanded="false" data-i18n-placeholder="Tu handle (p. ej., tourist)…" placeholder="Seu handle (ex.: tourist)…">
+        <button id="sync-handle" class="icon-button" type="submit" data-i18n-aria="use" aria-label="Cargar handle de Codeforces">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M4 11a8.1 8.1 0 0 1 14.7-4.7L21 9"/><path d="M21 4v5h-5M20 13a8.1 8.1 0 0 1-14.7 4.7L3 15"/><path d="M3 20v-5h5"/></svg>
+        </button>
+        <span id="handle-display" class="handle-display" aria-hidden="true"></span>
+        <div class="handle-suggestions-panel" id="handle-suggestions-panel" hidden>
+          <div class="handle-suggestions" id="handle-suggestions" role="listbox" data-i18n-aria="recentHandles" aria-label="Handles recientes"></div>
+          <button id="clear-recent-handles" class="clear-recent-handles" type="button" data-i18n="clearRecentHandles" data-i18n-aria="clearRecentHandles" aria-label="Limpiar handles recientes">Limpiar handles recientes</button>
+        </div>
+      </form>
+      <div class="session-state">
+        <div class="profile" id="profile"></div>
+        <p class="completion" aria-live="polite"><span id="completion-result"></span></p>
+      </div>
+
+    </section>
+    <section class="game" aria-labelledby="game-title">
+      <nav class="level-navigation" data-i18n-aria="level" aria-label="Nivel">
+        <div class="levels" id="levels"></div>
+      </nav>
+
+      <div id="ladder" class="ladder" aria-live="polite" aria-busy="false"></div>
+      <p class="notice" id="notice"></p>
+    </section>
+
+    </div>
+    <footer><span class="footer-copyright">© ACCEPT Group — 2026</span><a class="github-link" href="https://github.com/acceptcoding" target="_blank" rel="noopener" aria-label="GitHub — ACCEPT Group"><svg class="github-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.04c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.75.08-.74.08-.74 1.2.09 1.84 1.23 1.84 1.23 1.07 1.83 2.8 1.3 3.48.99.11-.77.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.95 0-1.31.47-2.38 1.23-3.22-.12-.3-.53-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.65 1.65.24 2.87.12 3.17.76.84 1.23 1.91 1.23 3.22 0 4.62-2.8 5.64-5.48 5.94.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 .5Z"/></svg><span>GitHub</span></a></footer>
+  </main>
+  <script type="module" src="/js/app.js?v=ladder-v27-preferences-history"></script>
+</body>
+</html>
