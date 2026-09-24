@@ -55,7 +55,7 @@ test('completion history is normalized, boolean, and isolated by handle', () => 
 
 test('a history date is written only for a qualifying accepted problem', () => {
   const result = core.verifySubmissions([
-    { creationTimeSeconds: core.localDayBounds('2026-09-09').start / 1000, verdict: 'OK', problem: { contestId: 1, index: 'A' } },
+    { creationTimeSeconds: core.submissionDayBounds('2026-09-09').start / 1000, verdict: 'OK', problem: { contestId: 1, index: 'A' } },
   ], { day: '2026-09-09', problemIds: ['1:A'] });
   assert.equal(core.completionEstablished(result, ['1:A']), true);
   assert.equal(core.completionEstablished({ ...result, status: 'UNAVAILABLE' }, ['1:A']), false);

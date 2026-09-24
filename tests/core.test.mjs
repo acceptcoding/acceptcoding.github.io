@@ -431,7 +431,7 @@ test('URL parsing accepts only selectable date and visible level', () => {
 });
 
 test('submission verification is newest-first, one-AC-done, and half-open local day', () => {
-  const bounds = core.localDayBounds('2026-09-09');
+  const bounds = core.submissionDayBounds('2026-09-09');
   const submissions = [
     { id: 4, creationTimeSeconds: bounds.end / 1000, verdict: 'OK', problem: { contestId: 2, index: 'A' } },
     { id: 3, creationTimeSeconds: (bounds.start + 2) / 1000, verdict: 'OK', problem: { contestId: 3, index: 'A' } },

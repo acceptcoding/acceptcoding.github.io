@@ -66,11 +66,11 @@ test('status rendering has filled, hollow, and neutral structural states', () =>
   assert.match(css, /\.status-known, \.status-known-wrong \{[^}]*background: transparent[^}]*color: var\(--muted\)/);
   assert.match(app, /statusLabel\(status\)/);
   assert.match(app, /status === 'none' \? '—' : statusGlyph\(status\)/);
-  assert.match(app, /status === 'none'\) \{ mark\.setAttribute\('role', 'img'\); mark\.setAttribute\('aria-label', t\('handleHelp'\)/);
-  assert.match(app, /current: t\('acceptedOnDate'\)/);
-  assert.match(app, /known: t\('acceptedOtherDate'\)/);
-  assert.match(app, /'current-wrong': t\('unsuccessfulOnDate'\)/);
-  assert.match(app, /'known-wrong': t\('unsuccessfulOtherDate'\)/);
+  assert.match(app, /current: t\('statusSolvedToday'\)/);
+  assert.match(app, /'current-wrong': t\('statusTriedToday'\)/);
+  assert.match(app, /known: t\('statusSolvedOtherDate'\)/);
+  assert.match(app, /'known-wrong': t\('statusTriedOtherDate'\)/);
+  assert.match(app, /none: t\('statusNotTried'\)/);
 });
 
 test('header and problem rows preserve title, rating, then status order', () => {

@@ -20,14 +20,13 @@ test('one sync transaction delegates ordered account work to the coordinator', (
   assert.doesNotMatch(app, /wireVerification|#verify|verify\.addEventListener/);
 });
 
-test('stateful sync button and read-only completion are present', () => {
+test('stateful sync button is present without a completion message', () => {
   assert.match(app, /renderSyncButton/);
   assert.match(app, /t\('use'\)/);
   assert.match(app, /t\('refresh'\)/);
   assert.match(app, /syncRefreshing/);
-  assert.match(app, /completionDone/);
   assert.match(html, /id="sync-handle"/);
-  assert.match(html, /id="completion-result"/);
+  assert.doesNotMatch(html, /id="completion-result"|class="completion"/);
   assert.doesNotMatch(html, /id="verify"/);
 });
 
@@ -38,7 +37,7 @@ test('row renderer keeps one combined problem link, rating, then fixed status', 
   assert.match(app, /problem-link/);
   assert.match(app, /statusGlyph/);
   assert.match(app, /'current-wrong'/);
-  assert.match(html, /class="completion"/);
+  assert.doesNotMatch(html, /class="completion"/);
 });
 
 test('one canonical activity key and coordinator-owned request generations are used', () => {

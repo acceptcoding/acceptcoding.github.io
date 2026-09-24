@@ -305,17 +305,10 @@ test('problem ratings distinguish Legendary Grandmaster from ordinary red', () =
   assert.match(app, /rating-\$\{core\.codeforcesRatingCategory\(problem\.rating\)\}/);
 });
 
-test('completion is prominent, semantic, read-only, and not a banner', () => {
-  assert.match(i18n, /completionDone: '✓ Feito!'/);
-  assert.match(i18n, /completionDone: '✓ Done!'/);
-  assert.match(i18n, /completionDone: '✓ ¡Listo!'/);
-  assert.match(css, /\.completion-done \{ color: var\(--success\); \}/);
-  assert.match(css, /\.completion > span \{[^}]*font-size: 15\.4px/);
+test('completion feedback is not rendered under the handle control', () => {
   assert.match(html, /class="session-state"/);
-  assert.match(html, /id="completion-result"/);
-  assert.doesNotMatch(`${html}${css}${i18n}`, /\b(Congratulations|confetti|XP|badge)\b/i);
+  assert.doesNotMatch(`${html}${css}`, /completion-result|class="completion"|\.completion-done/);
   assert.doesNotMatch(html, /id="verify"/);
-  assert.doesNotMatch(html.slice(html.indexOf('class="completion"'), html.indexOf('</p>', html.indexOf('class="completion"'))), /<button\b/);
 });
 
 test('guide and account controls preserve the requested scale and alignment', () => {
@@ -326,7 +319,6 @@ test('guide and account controls preserve the requested scale and alignment', ()
   assert.match(css, /\.how-to-steps ul li \{ padding-left: 0; \}/);
   assert.match(css, /\.masthead \{ position: relative; display: flex; width: min\(100%, 500px\); align-items: center; justify-content: center;/);
   assert.match(css, /\.handle-row input \{[^}]*font-size: 15px/);
-  assert.match(css, /\.completion \{ display: flex;[^}]*align-items: center;[^}]*transform: translateX\(-2px\)/);
   assert.match(app, /COPY\[currentLanguage\(\)\]\[key\] \?\? key/);
 });
 

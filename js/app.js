@@ -590,7 +590,7 @@ function renderShareContext() {
 }
 function verificationForSelectedDate() { const handle = loadedProjectionHandle(); return handle ? state.verification.get(`${handle}|${state.date}`) || null : null; }
 function statusLabel(status) {
-  return ({ current: t('acceptedOnDate'), 'current-wrong': t('unsuccessfulOnDate'), known: t('acceptedOtherDate'), 'known-wrong': t('unsuccessfulOtherDate') })[status];
+  return ({ current: t('statusSolvedToday'), 'current-wrong': t('statusTriedToday'), known: t('statusSolvedOtherDate'), 'known-wrong': t('statusTriedOtherDate'), none: t('statusNotTried') })[status];
 }
 function statusGlyph(status) { return status === 'current' || status === 'known' ? '✓' : status === 'current-wrong' || status === 'known-wrong' ? '✗' : ''; }
 function headerLabel(full, short) {

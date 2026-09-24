@@ -40,6 +40,15 @@ export function localDayBounds(date) {
   const end = Date.UTC(year, month - 1, day + 1);
   return { start, end };
 }
+// Submissions follow the visitor's local calendar day. Challenge selection
+// retains the UTC-midnight boundary above for deterministic history.
+export function submissionDayBounds(date) {
+  const { year, month, day } = dateParts(date);
+  return {
+    start: new Date(year, month - 1, day).getTime(),
+    end: new Date(year, month - 1, day + 1).getTime(),
+  };
+}
 export function dayWindow(date) { const { start, end } = localDayBounds(date); return [start, end]; }
 export function shiftDate(date, amount) { const shifted = new Date(dateParts(date).timestamp); shifted.setUTCDate(shifted.getUTCDate() + amount); return shifted.toISOString().slice(0, 10); }
 export function sundayStart(date) { const day = new Date(`${date}T12:00:00Z`).getUTCDay(); return shiftDate(date, -day); }

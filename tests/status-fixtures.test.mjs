@@ -47,3 +47,13 @@ test('transient verdicts are not unsuccessful attempts', () => {
   assert.deepEqual(result.unsuccessfulIds, []);
   assert.equal(core.isUnsuccessfulVerdict('TESTING'), false);
 });
+
+test('a Codeforces submission after UTC midnight still belongs to the visitor local day', () => {
+  const result = core.verifySubmissions([{
+    creationTimeSeconds: Date.parse('2026-09-24T01:33:23Z') / 1000,
+    verdict: 'OK',
+    problem: { contestId: 595, index: 'A' },
+  }], { day: '2026-09-23', problemIds: ['595:A'] });
+  assert.deepEqual(result.solvedIds, ['595:A']);
+  assert.equal(result.done, true);
+});

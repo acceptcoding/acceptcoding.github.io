@@ -101,9 +101,8 @@ function renderRow(doc, container, problem, row, translate, problemUrl, ratingCa
   mark.className = `problem-status status-${status}`;
   mark.textContent = status === 'none' ? '—' : (resolveValue(statusGlyphs, status) ?? '');
   mark.setAttribute('role', 'img');
-  const statusLabel = status === 'none'
-    ? labelFor(translate, 'handleHelp')
-    : (resolveValue(statusLabels, status) ?? status);
+  const statusLabel = resolveValue(statusLabels, status)
+    ?? (status === 'none' ? labelFor(translate, 'handleHelp') : status);
   mark.setAttribute('aria-label', statusLabel);
   mark.title = statusLabel;
   const statusCell = doc.createElement('span');

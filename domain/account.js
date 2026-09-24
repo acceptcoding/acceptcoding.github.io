@@ -1,5 +1,5 @@
 import { LEVEL_PROVENANCE } from './config.js';
-import { isValidDateString, localDayBounds } from './dates.js';
+import { isValidDateString, submissionDayBounds } from './dates.js';
 import { stableProblemId } from './problems.js';
 import { canonicalLevel } from './url-state.js';
 
@@ -72,7 +72,7 @@ export function isUnsuccessfulVerdict(verdict) {
 
 export function verifySubmissions(submissions, { day, problemIds } = {}) {
   const ids = new Set(problemIds || []);
-  const bounds = localDayBounds(day);
+  const bounds = submissionDayBounds(day);
   const solved = new Set();
   const unsuccessful = new Set();
   for (const submission of [...(Array.isArray(submissions) ? submissions : [])]

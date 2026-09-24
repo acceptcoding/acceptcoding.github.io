@@ -1,7 +1,7 @@
 import { LEVEL_PROVENANCE } from '../domain/config.js';
 import { inferLadder } from '../domain/account.js';
 import { normalizeHandle, verifySubmissions, completionEstablished } from '../domain/account.js';
-import { localDayBounds } from '../domain/dates.js';
+import { submissionDayBounds } from '../domain/dates.js';
 
 export const PROFILE_ERROR_CODES = Object.freeze({
   HANDLE_NOT_FOUND: 'HANDLE_NOT_FOUND',
@@ -159,7 +159,7 @@ export function createAccountSync({
 
     let submissions;
     try {
-      submissions = await ports.userStatus(displayHandle, { beforeSeconds: localDayBounds(context.date).start / 1000 });
+      submissions = await ports.userStatus(displayHandle, { beforeSeconds: submissionDayBounds(context.date).start / 1000 });
     } catch (error) {
       if (!isCurrent(owned, { ...context, ladder }, normalized)) return { status: ACCOUNT_SYNC_STATUS.STALE };
       const result = unavailableVerification('STATUS_UNAVAILABLE');

@@ -14,6 +14,7 @@ const [html, previous, css, app, i18n] = await Promise.all([
 test('problem list has one canonical responsive three-column grid', () => {
   assert.match(css, /--problem-grid-columns: minmax\(0, 1fr\) 50px 44px/);
   assert.match(css, /--problem-grid-gap: 5px/);
+  assert.match(css, /--problem-grid-inset: 6px/);
   assert.doesNotMatch(css, /\.problem-header-done, \.problem-status \{ transform: translateX\(7px\); \}/);
   assert.match(css, /--problem-grid-columns: minmax\(0, 1fr\) 48px 44px/);
   assert.match(css, /\.problem-grid \{ display: grid; grid-template-columns: var\(--problem-grid-columns\); column-gap: var\(--problem-grid-gap\); padding-right: var\(--problem-grid-inset\); \}/);
@@ -55,23 +56,24 @@ test('Daily has no calendar navigation and the footer has no timezone label', ()
   assert.match(css, /\.week-side \{[^}]*align-self: center/);
 });
 
-test('session row owns account and completion, with exact localized copy', () => {
-  assert.match(html, /<div class="session-state">[\s\S]*id="profile"[\s\S]*id="completion-result"/);
+test('session row owns the account without a completion message', () => {
+  assert.match(html, /<div class="session-state">[\s\S]*id="profile"/);
+  assert.doesNotMatch(html, /id="completion-result"|class="completion"/);
   assert.ok(html.indexOf('class="identity"') < html.indexOf('class="session-state"'));
-  assert.deepEqual(Object.values(COPY).map(copy => copy.completionDone), ['✓ Feito!', '✓ Done!', '✓ ¡Listo!']);
+
   assert.doesNotMatch(app, /profile-handle/);
   assert.match(app, /profile-metric/);
   assert.match(app, /profile-rank/);
   assert.match(app, /profile-rating/);
   assert.match(css, /\.session-state \{ display: flex;[^}]*justify-content: space-between/);
   assert.match(css, /\.profile \{[^}]*font-size: 14px/);
-  assert.match(css, /\.completion-done \{ color: var\(--success\); \}/);
+  assert.doesNotMatch(css, /\.completion-done|\.completion > span/);
   assert.doesNotMatch(app, /completionNotYet/);
   assert.match(i18n, /goForIt: 'Bora!'|goForIt: 'Go for it!'|goForIt: '¡Dale!'/);
 });
 
-test('completion is not duplicated and unavailable verification stays neutral', () => {
-  assert.equal((html.match(/id="completion-result"/g) || []).length, 1);
+test('completion remains internal and unavailable verification stays neutral', () => {
+  assert.equal((html.match(/id="completion-result"/g) || []).length, 0);
   assert.doesNotMatch(html, /context-description|translation-hint|data-i18n="description"|data-i18n="translationHint"/);
   assert.match(app, /result\?\.status === 'CHECKED'/);
   assert.match(app, /: '';/);
@@ -94,7 +96,7 @@ test('problem link remains one title anchor and statuses retain semantics', () =
 
 test('typography floors keep metadata readable at the default zoom', () => {
   assert.match(css, /body \{[^}]*font-size: 16\.5px/);
-  assert.match(css, /\.problem-title \{[^}]*overflow-wrap: anywhere[^}]*font-size: 16px/);
+  assert.match(css, /\.problem-title \{[^}]*overflow-wrap: anywhere[^}]*font-size: 15\.5px/);
   assert.match(css, /\.profile \{[^}]*font-size: 14px/);
   assert.match(css, /\.level \{[^}]*font-family: 'Roboto Condensed'[^}]*font-size: 12px[^}]*font-weight: 700/);
   assert.match(css, /\.level \{[^}]*flex: 1 1 0[^}]*min-width: max-content[^}]*min-height: 34px/);
