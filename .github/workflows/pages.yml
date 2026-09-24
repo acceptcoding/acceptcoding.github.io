@@ -17,6 +17,8 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    env:
+      TZ: America/Sao_Paulo
     steps:
       - name: Check out source
         uses: actions/checkout@v4
