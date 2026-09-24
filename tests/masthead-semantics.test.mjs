@@ -3,12 +3,13 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { COPY } from '../js/i18n.js';
 
-const [html, css, app, shape, favicon] = await Promise.all([
+const [html, css, app, shape, favicon, renderer] = await Promise.all([
   readFile(new URL('../index.html', import.meta.url), 'utf8'),
   readFile(new URL('../styles.css', import.meta.url), 'utf8'),
   readFile(new URL('../js/app.js', import.meta.url), 'utf8'),
   readFile(new URL('../balloon-shape.svg', import.meta.url), 'utf8'),
   readFile(new URL('../balloon.svg', import.meta.url), 'utf8'),
+  readFile(new URL('../ui/problem-list-renderer.js', import.meta.url), 'utf8'),
 ]);
 
 test('header wordmark is accessible text beside a decorative plain balloon', () => {
@@ -75,13 +76,14 @@ test('status rendering has filled, hollow, and neutral structural states', () =>
 
 test('header and problem rows preserve title, rating, then status order', () => {
   assert.match(app, /header\.id = 'problem-headers'/);
-  assert.match(app, /header\.append\(problem, difficulty, done\)/);
+  assert.match(renderer, /header\.append\(id, problem, difficulty, done\)/);
   assert.match(app, /row\.append\(problemCell, rating, statusCell\)/);
   assert.match(app, /header\.className = 'problem-grid problem-header'/);
   assert.match(app, /row\.classList\.add\('problem-grid'\)/);
   assert.match(css, /\.problem-grid \{ display: grid; grid-template-columns: var\(--problem-grid-columns\); column-gap: var\(--problem-grid-gap\); padding-right: var\(--problem-grid-inset\); \}/);
-  assert.match(css, /\.problem-header-difficulty \{ grid-column: 2; text-align: right; \}/);
-  assert.match(css, /\.problem-header-problem \{ grid-column: 1; text-align: left; \}/);
-  assert.match(css, /\.problem-header-done \{ grid-column: 3; text-align: center; \}/);
-  assert.match(css, /\.problem-cell \{ grid-column: 1 \/ 2; min-width: 0; \}/);
+  assert.match(css, /\.problem-header-id \{ grid-column: 1; justify-self: start; text-align: left; \}/);
+  assert.match(css, /\.problem-header-difficulty \{ grid-column: 3; justify-self: stretch; text-align: right; transform: translateX\(var\(--problem-right-shift\)\); \}/);
+  assert.match(css, /\.problem-header-problem \{ grid-column: 2; justify-self: start; text-align: left; \}/);
+  assert.match(css, /\.problem-header-done \{ grid-column: 4; justify-self: stretch; text-align: center; transform: translateX\(var\(--problem-right-shift\)\); \}/);
+  assert.match(css, /\.problem-cell \{ grid-column: 1 \/ 3; min-width: 0; \}/);
 });

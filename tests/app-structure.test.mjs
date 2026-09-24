@@ -2,10 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
-const [app, persistence, accountSync] = await Promise.all([
+const [app, persistence, accountSync, renderer] = await Promise.all([
   readFile(new URL('../js/app.js', import.meta.url), 'utf8'),
   readFile(new URL('../js/persistence.js', import.meta.url), 'utf8'),
   readFile(new URL('../application/account-sync.js', import.meta.url), 'utf8'),
+  readFile(new URL('../ui/problem-list-renderer.js', import.meta.url), 'utf8'),
 ]);
 const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const i18n = await readFile(new URL('../js/i18n.js', import.meta.url), 'utf8');
@@ -30,8 +31,8 @@ test('stateful sync button is present without a completion message', () => {
   assert.doesNotMatch(html, /id="verify"/);
 });
 
-test('row renderer keeps one combined problem link, rating, then fixed status', () => {
-  assert.match(app, /link\.append\(title\)/);
+test('row renderer keeps one combined ID-and-problem link, rating, then fixed status', () => {
+  assert.match(renderer, /link\.append\(id, title\)/);
   assert.match(app, /row\.append\(problemCell, rating, statusCell\)/);
   assert.doesNotMatch(app, /idLink/);
   assert.match(app, /problem-link/);

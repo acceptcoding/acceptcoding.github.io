@@ -56,6 +56,23 @@ test('manual level ownership is retained only for its owning handle', async () =
   assert.equal(coordinator.getState().levelProvenance, LEVEL_PROVENANCE.INFERRED);
 });
 
+test('manual level selected before a handle is loaded yields to that handle recommendation', async () => {
+  const coordinator = createAccountSync({
+    initialState: { date: '2026-09-18', handle: '', ladder, ladderStatus: 'ready', level: 'legend', levelProvenance: LEVEL_PROVENANCE.MANUAL, levelOwnerHandle: '' },
+    ports: {
+      userInfo: async (handle) => [profile(handle, 1200)],
+      userStatus: async () => [],
+      verifySubmissions: () => ({ status: 'CHECKED', solvedIds: [], unsuccessfulIds: [], problemIds: ['1:A'] }),
+      problemId: (problem) => `${problem.contestId}:${problem.index}`,
+      visibleProblemIds: () => ['1:A'],
+    },
+  });
+  await coordinator.syncHandle('alice');
+  assert.equal(coordinator.getState().level, 'pupil');
+  assert.equal(coordinator.getState().levelProvenance, LEVEL_PROVENANCE.INFERRED);
+  assert.equal(coordinator.getState().levelOwnerHandle, 'alice');
+});
+
 test('manual level selected through live context survives a refresh of the same handle', async () => {
   const context = { date: '2026-09-18', handle: 'alice', loadedHandle: 'alice', ladder, ladderStatus: 'ready', level: 'legend', levelProvenance: LEVEL_PROVENANCE.MANUAL, levelOwnerHandle: 'alice' };
   const coordinator = createAccountSync({

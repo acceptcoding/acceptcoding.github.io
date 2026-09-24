@@ -11,20 +11,21 @@ const [html, previous, css, app, i18n] = await Promise.all([
   readFile(new URL('../js/i18n.js', import.meta.url), 'utf8'),
 ]);
 
-test('problem list has one canonical responsive three-column grid', () => {
-  assert.match(css, /--problem-grid-columns: minmax\(0, 1fr\) 50px 44px/);
+test('problem list has one canonical responsive four-column grid', () => {
+  assert.match(css, /--problem-grid-columns: var\(--problem-id-width\) minmax\(0, 1fr\) 50px 44px/);
   assert.match(css, /--problem-grid-gap: 5px/);
   assert.match(css, /--problem-grid-inset: 6px/);
-  assert.doesNotMatch(css, /\.problem-header-done, \.problem-status \{ transform: translateX\(7px\); \}/);
-  assert.match(css, /--problem-grid-columns: minmax\(0, 1fr\) 48px 44px/);
+  assert.match(css, /--problem-right-shift: 5px/);
+  assert.match(css, /--problem-grid-columns: 46px minmax\(0, 1fr\) 48px 44px/);
   assert.match(css, /\.problem-grid \{ display: grid; grid-template-columns: var\(--problem-grid-columns\); column-gap: var\(--problem-grid-gap\); padding-right: var\(--problem-grid-inset\); \}/);
   assert.match(css, /\.problem-header \{[^}]*padding: 0 var\(--problem-grid-inset\) 8px 0/);
   assert.match(css, /\.problem \{[^}]*padding: 9px var\(--problem-grid-inset\) 9px 0/);
 
   assert.match(app, /header\.className = 'problem-grid problem-header'/);
   assert.match(app, /row\.classList\.add\('problem-grid'\)/);
-  assert.match(css, /\.problem-cell \{ grid-column: 1 \/ 2; min-width: 0; \}/);
-  assert.match(css, /\.problem-status-cell \{ grid-column: 3; min-width: 0; \}/);
+  assert.match(css, /\.problem-cell \{ grid-column: 1 \/ 3; min-width: 0; \}/);
+  assert.match(css, /\.problem-status-cell \{ grid-column: 4; min-width: 0;[^}]*transform: translateX\(var\(--problem-right-shift\)\); \}/);
+  assert.match(css, /\.problem-id \{[^}]*font: 500 15\.5px\/1\.3 'Roboto Condensed'/);
 });
 
 test('visible headers are concise while accessible labels stay expanded', () => {
@@ -40,12 +41,16 @@ test('visible headers are concise while accessible labels stay expanded', () => 
 });
 
 test('grid headings and row fields use the same logical alignment', () => {
-  assert.match(css, /\.problem-header-difficulty \{ grid-column: 2; text-align: right; \}/);
-  assert.match(css, /\.problem-header-problem \{ grid-column: 1; text-align: left; \}/);
-  assert.match(css, /\.problem-header-done \{ grid-column: 3; text-align: center; \}/);
-  assert.match(css, /\.rating \{ grid-column: 2;/);
-  assert.match(css, /\.problem-cell \{ grid-column: 1 \/ 2; min-width: 0; \}/);
-  assert.match(css, /\.problem-link \{[^}]*align-items: center/);
+  assert.match(css, /\.problem-header-id \{ grid-column: 1; justify-self: start; text-align: left; \}/);
+  assert.match(css, /\.problem-header-difficulty \{ grid-column: 3; justify-self: stretch; text-align: right; transform: translateX\(var\(--problem-right-shift\)\); \}/);
+  assert.match(css, /\.problem-header-problem \{ grid-column: 2; justify-self: start; text-align: left; \}/);
+  assert.match(css, /\.problem-header-done \{ grid-column: 4; justify-self: stretch; text-align: center; transform: translateX\(var\(--problem-right-shift\)\); \}/);
+  assert.match(css, /\.rating \{ grid-column: 3;[^}]*text-align: right; \}/);
+  assert.match(css, /\.rating \{ justify-self: stretch; transform: translateX\(var\(--problem-right-shift\)\); \}/);
+  assert.match(css, /\.problem-status-cell \{ grid-column: 4; min-width: 0; transform: translateX\(var\(--problem-right-shift\)\); \}/);
+  assert.match(css, /\.problem-cell \{ grid-column: 1 \/ 3; min-width: 0; \}/);
+  assert.match(css, /\.problem-link \{[^}]*grid-template-columns: var\(--problem-id-width\) minmax\(0, 1fr\)[^}]*align-items: center/);
+  assert.match(css, /\.problem-id \{ grid-column: 1; min-width: 0; overflow-wrap: anywhere; color: var\(--muted\); font: 500 15\.5px\/1\.3 'Roboto Condensed'/);
 });
 
 test('Daily has no calendar navigation and the footer has no timezone label', () => {

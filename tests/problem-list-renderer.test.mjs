@@ -18,7 +18,7 @@ class Document {
 }
 
 const doc = new Document();
-const translate = (key) => ({ problemTable: 'Problems', problemHeaderDifficulty: 'Difficulty', problemHeaderDifficultyShort: 'Rating', problemHeaderProblem: 'Problem', problemHeaderDone: 'Done', loading: 'Loading', unavailable: 'Unavailable', empty: 'Empty', retry: 'Retry', handleHelp: 'Not checked', acceptedOnDate: 'Accepted today' }[key] || key);
+const translate = (key) => ({ problemTable: 'Problems', problemHeaderDifficulty: 'Difficulty', problemHeaderDifficultyShort: 'Rating', problemHeaderProblem: 'Problem', problemHeaderId: 'ID', problemHeaderDone: 'Done', loading: 'Loading', unavailable: 'Unavailable', empty: 'Empty', retry: 'Retry', handleHelp: 'Not checked', acceptedOnDate: 'Accepted today' }[key] || key);
 const dependencies = { translate, problemUrl: (problem) => `https://example.test/${problem.contestId}/${problem.index}`, ratingCategory: () => 'newbie', statusLabels: { current: 'Accepted today' } };
 
 function container() { return new Node('div', doc); }
@@ -26,16 +26,19 @@ function problem(name = 'A problem') { return { contestId: 1, index: 'A', name, 
 
 test('renders header order, one title anchor, and row cell order', () => {
   const box = container();
-  renderProblemList({ ...dependencies, container: box, model: { status: 'ready', items: [problem('First'), problem('Second')], rows: [{ status: 'current' }, { status: 'none' }] } });
+  renderProblemList({ ...dependencies, container: box, model: { status: 'ready', items: [problem('First'), problem('Second')], rows: [{ id: '1:A', status: 'current' }, { id: '1:A', status: 'none' }] } });
   assert.deepEqual(box.children.map((child) => child.className), ['problem-grid problem-header', 'problem problem-grid', 'problem problem-grid']);
-  assert.deepEqual(box.children[0].children.map((child) => child.className), ['problem-header-cell problem-header-problem', 'problem-header-cell problem-header-difficulty', 'problem-header-cell problem-header-done']);
-  assert.equal(box.children[1].children[0].children[0].children[0].children[0].textContent, 'First');
-  assert.equal(box.children[2].children[0].children[0].children[0].children[0].textContent, 'Second');
+  assert.deepEqual(box.children[0].children.map((child) => child.className), ['problem-header-cell problem-header-id', 'problem-header-cell problem-header-problem', 'problem-header-cell problem-header-difficulty', 'problem-header-cell problem-header-done']);
+  assert.equal(box.children[1].children[0].children[0].children[0].textContent, '1A');
+  assert.equal(box.children[1].children[0].children[0].children[1].children[0].textContent, 'First');
+  assert.equal(box.children[2].children[0].children[0].children[0].textContent, '1A');
+  assert.equal(box.children[2].children[0].children[0].children[1].children[0].textContent, 'Second');
   const row = box.children[1];
   assert.deepEqual(row.children.map((child) => child.className), ['problem-cell', 'rating rating-newbie', 'problem-status-cell']);
   assert.equal(row.children[0].children.length, 1);
   assert.equal(row.children[0].children[0].className, 'problem-link');
-  assert.equal(row.children[0].children[0].children[0].className, 'problem-title');
+  assert.equal(row.children[0].children[0].children[0].className, 'problem-id');
+  assert.equal(row.children[0].children[0].children[1].className, 'problem-title');
 });
 
 test('preserves loading, unavailable, error retry, and empty states', () => {

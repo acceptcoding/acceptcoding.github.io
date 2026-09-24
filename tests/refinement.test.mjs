@@ -5,7 +5,7 @@ import * as core from '../core.js';
 import { COPY, LANGUAGES } from '../js/i18n.js';
 import { createLadderRepository } from '../js/ladder-repository.js';
 
-const [html, css, app, storage, previous, howTo, codeforces, i18n] = await Promise.all([
+const [html, css, app, storage, previous, howTo, codeforces, i18n, renderer] = await Promise.all([
   readFile(new URL('../index.html', import.meta.url), 'utf8'),
   readFile(new URL('../styles.css', import.meta.url), 'utf8'),
   readFile(new URL('../js/app.js', import.meta.url), 'utf8'),
@@ -14,6 +14,7 @@ const [html, css, app, storage, previous, howTo, codeforces, i18n] = await Promi
   readFile(new URL('../tools/templates/home-template.html', import.meta.url), 'utf8'),
   readFile(new URL('../js/codeforces.js', import.meta.url), 'utf8'),
   readFile(new URL('../js/i18n.js', import.meta.url), 'utf8'),
+  readFile(new URL('../ui/problem-list-renderer.js', import.meta.url), 'utf8'),
 ]);
 
 test('refined masthead and copy are singular and exact', async () => {
@@ -248,7 +249,7 @@ test('shared Codeforces catalog promises reuse success and retry failures', () =
 
 test('problem resource uses one link and excludes rating/status', () => {
   assert.match(app, /const link = document\.createElement\('a'\); link\.className = 'problem-link'/);
-  assert.match(app, /link\.append\(title\)/);
+  assert.match(renderer, /link\.append\(id, title\)/);
   assert.match(app, /row\.append\(problemCell, rating, statusCell\)/);
   assert.doesNotMatch(app, /link\.title = t\('official'\)/);
   assert.match(css, /\.problem-link:hover \.problem-title/);

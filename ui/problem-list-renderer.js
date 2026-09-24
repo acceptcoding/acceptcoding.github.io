@@ -36,12 +36,17 @@ function renderHeader(doc, container, translate) {
   problem.setAttribute('role', 'columnheader');
   problem.append(headerLabel(doc, labelFor(translate, 'problemHeaderProblem'), labelFor(translate, 'problemHeaderProblem')));
 
+  const id = doc.createElement('span');
+  id.className = 'problem-header-cell problem-header-id';
+  id.setAttribute('role', 'columnheader');
+  id.append(headerLabel(doc, labelFor(translate, 'problemHeaderId'), labelFor(translate, 'problemHeaderId')));
+
   const done = doc.createElement('span');
   done.className = 'problem-header-cell problem-header-done';
   done.setAttribute('role', 'columnheader');
   done.append(headerLabel(doc, labelFor(translate, 'problemHeaderDone'), labelFor(translate, 'problemHeaderDone')));
 
-  header.append(problem, difficulty, done);
+  header.append(id, problem, difficulty, done);
   container.append(header);
 }
 
@@ -86,12 +91,15 @@ function renderRow(doc, container, problem, row, translate, problemUrl, ratingCa
   const title = doc.createElement('span');
   title.className = 'problem-title';
   title.append(doc.createTextNode(problem.name));
+  const id = doc.createElement('span');
+  id.className = 'problem-id';
+  id.textContent = String(row?.id || `${problem.contestId ?? problem.id}:${problem.index}`).replace(':', '');
   const link = doc.createElement('a');
   link.className = 'problem-link';
   link.href = problemUrl(problem);
   link.target = '_blank';
   link.rel = 'noopener';
-  link.append(title);
+  link.append(id, title);
   const problemCell = doc.createElement('span');
   problemCell.className = 'problem-cell';
   problemCell.setAttribute('role', 'cell');

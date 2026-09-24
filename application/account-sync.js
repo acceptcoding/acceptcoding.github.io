@@ -100,7 +100,7 @@ export function createAccountSync({
     const key = `${normalized}|${context.date}`;
     const sameHandle = Boolean(state.loadedHandle && state.loadedHandle === normalized && state.profile);
     const preserveManualLevel = context.levelProvenance === LEVEL_PROVENANCE.MANUAL
-      && (!context.levelOwnerHandle || context.levelOwnerHandle === normalized);
+      && context.levelOwnerHandle === normalized;
     commit({ handle: displayHandle, syncError: null, syncing: true, syncTarget: normalized }, { phase: 'start', request: owned });
 
     let user;
